@@ -1,0 +1,6 @@
+click
+https://github.com/turicas/rows/archive/develop.zip
+psycopg2
+requests
+requests-cache
+tqdm
