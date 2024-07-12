@@ -1,0 +1,38 @@
+field_name,field_type,null,max_length,subtype,choices,min,max
+object_uuid,text,false,36,VARCHAR,null,,
+tipo_proprietario,text,true,15,VARCHAR,"[""Pessoa f\u00edsica"", ""Pessoa jur\u00eddica""]",,
+marca,text,false,5,VARCHAR,null,,
+proprietario,text,true,132,VARCHAR,null,,
+proprietario_documento,text,true,14,VARCHAR,null,,
+outros_proprietarios,text,true,220,VARCHAR,null,,
+uf_proprietario,text,true,2,VARCHAR,null,,
+operador,text,true,128,VARCHAR,null,,
+outros_operadores,text,true,314,VARCHAR,null,,
+uf_operador,text,true,2,VARCHAR,null,,
+operador_documento,text,true,14,VARCHAR,null,,
+matricula,integer,true,,INTEGER,null,0,99999999
+numero_serie,text,true,13,VARCHAR,null,,
+cd_categoria,text,true,3,VARCHAR,null,,
+cd_tipo,text,true,8,VARCHAR,null,,
+modelo,text,true,29,VARCHAR,null,,
+fabricante,text,true,50,VARCHAR,null,,
+cd_cls,text,true,3,VARCHAR,null,,
+tipo_icao,text,true,5,VARCHAR,null,,
+peso_max_decolagem,text,true,6,VARCHAR,null,,
+tripulacao_min,integer,true,,SMALLINT,null,0,4
+passageiros_max,integer,true,,SMALLINT,null,0,660
+assentos,integer,true,,SMALLINT,null,0,663
+ano_fabricacao,integer,true,,SMALLINT,null,0,2029
+data_validade_cva,text,true,13,VARCHAR,null,,
+cva_status,text,true,6,VARCHAR,"[""Abordo"", ""Isenta""]",,
+data_validade_ca,text,true,13,VARCHAR,null,,
+ca_status,text,true,6,VARCHAR,"[""Abordo"", ""Isenta""]",,
+data_cancelamento,text,true,22,VARCHAR,null,,
+motivo_cancelamento,text,true,24,VARCHAR,null,,
+cd_interdicao,text,true,6,VARCHAR,null,,
+cd_marca_nac1,text,true,5,VARCHAR,null,,
+cd_marca_nac2,text,true,5,VARCHAR,null,,
+cd_marca_nac3,text,true,5,VARCHAR,null,,
+cd_marca_estrangeira,text,true,11,VARCHAR,null,,
+observacao,text,true,100,VARCHAR,null,,
+data_matricula,text,true,22,VARCHAR,null,,
