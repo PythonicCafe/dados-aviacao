@@ -7,12 +7,24 @@ CREATE TABLE anac_aeronave AS
       WHEN LENGTH(proprietario_documento) = 14
         THEN company_uuid(proprietario_documento)
       ELSE uuid_nil()
-    END AS object_uuid,
+    END AS proprietario_uuid,
     CASE
       WHEN LENGTH(proprietario_documento) = 11 THEN 'Pessoa física'
       WHEN LENGTH(proprietario_documento) = 14 THEN 'Pessoa jurídica'
       ELSE NULL
     END AS tipo_proprietario,
+    CASE
+      WHEN LENGTH(operador_documento) = 11 AND SUBSTRING(operador_documento FROM 4 FOR 6) ~ '^[0-9]{6}$'
+        THEN person_uuid(operador_documento, operador)
+      WHEN LENGTH(operador_documento) = 14
+        THEN company_uuid(operador_documento)
+      ELSE uuid_nil()
+    END AS operador_uuid,
+    CASE
+      WHEN LENGTH(operador_documento) = 11 THEN 'Pessoa física'
+      WHEN LENGTH(operador_documento) = 14 THEN 'Pessoa jurídica'
+      ELSE NULL
+    END AS tipo_operador,
     *
   FROM (
     SELECT
@@ -33,7 +45,7 @@ CREATE TABLE anac_aeronave AS
       clean_text(nm_fabricante) AS fabricante,
       clean_text(cd_cls) AS cd_cls, -- TODO: renomear?
       clean_text(cd_tipo_icao) AS tipo_icao,
-      clean_text(nr_pmd) AS peso_max_decolagem,
+      clean_text(nr_pmd) AS peso_max_decolagem, -- TODO: remover 'kg/KG' e transformar em int?
       parse_int(clean_text(nr_tripulacao_min)) AS tripulacao_min,
       parse_int(clean_text(nr_passageiros_max)) AS passageiros_max,
       parse_int(clean_text(nr_assentos)) AS assentos,
@@ -48,7 +60,7 @@ CREATE TABLE anac_aeronave AS
         ELSE NULL
       END AS data_validade_ca,
       parse_status_ca_cva(dt_validade_ca) AS ca_status,
-      to_timestamp(clean_text(dt_canc), 'YYYY-MM-DD HH24:MI:SS.US') AS data_cancelamento,
+      to_timestamp(clean_text(dt_canc), 'YYYY-MM-DD HH24:MI:SS.US')::date AS data_cancelamento,
       clean_text(ds_motivo_canc) AS motivo_cancelamento,
       clean_text(cd_interdicao) AS cd_interdicao, -- TODO: renomear?
       clean_text(cd_marca_nac1) AS cd_marca_nac1, -- TODO: renomear?

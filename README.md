@@ -13,8 +13,8 @@ make build start bash
 ```
 
 Dentro do container, execute o script que deseja. Os dados estarão:
-- Dados originais (baixados): `docker/data/main/data/download` (equivalente a `/data/download` no container `main`)
-- Dados finais (tratados): `docker/data/main/data/output` (equivalente a `/data/output` no container `main`)
+- Dados originais (baixados): `docker/data/main/download` (equivalente a `/data/download` no container `main`)
+- Dados finais (tratados): `docker/data/main/output` (equivalente a `/data/output` no container `main`)
 
 ## Contribuindo
 
