@@ -12,7 +12,7 @@ filename_fixed_2="/data/download/${table_name}-fixed-2.csv"
 encoding="utf-8"
 dialect="excel"
 sql_filename="sql/${table_name}.sql"
-output_filename="/data/output/${table_name}.csv"
+output_filename="/data/output/${table_name}.csv.gz"
 
 rm -rf "$filename" "$filename_fixed" "$filename_fixed_2"
 wget -O "$filename" "$url"

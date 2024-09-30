@@ -9,7 +9,7 @@ CREATE TABLE anac_aeronave AS
       ELSE uuid_nil()
     END AS proprietario_uuid,
     CASE
-      WHEN LENGTH(proprietario_documento) = 11 THEN 'Pessoa física'
+      WHEN LENGTH(proprietario_documento) = 11 AND SUBSTRING(proprietario_documento FROM 4 FOR 6) ~ '^[0-9]{6}$' THEN 'Pessoa física'
       WHEN LENGTH(proprietario_documento) = 14 THEN 'Pessoa jurídica'
       ELSE NULL
     END AS tipo_proprietario,
@@ -21,7 +21,7 @@ CREATE TABLE anac_aeronave AS
       ELSE uuid_nil()
     END AS operador_uuid,
     CASE
-      WHEN LENGTH(operador_documento) = 11 THEN 'Pessoa física'
+      WHEN LENGTH(operador_documento) = 11 AND SUBSTRING(operador_documento FROM 4 FOR 6) ~ '^[0-9]{6}$' THEN 'Pessoa física'
       WHEN LENGTH(operador_documento) = 14 THEN 'Pessoa jurídica'
       ELSE NULL
     END AS tipo_operador,
@@ -60,7 +60,7 @@ CREATE TABLE anac_aeronave AS
         ELSE NULL
       END AS data_validade_ca,
       parse_status_ca_cva(dt_validade_ca) AS ca_status,
-      to_timestamp(clean_text(dt_canc), 'YYYY-MM-DD HH24:MI:SS.US')::date AS data_cancelamento,
+      to_timestamp(clean_text(dt_canc), 'DD/MM/YYYY')::date AS data_cancelamento,
       clean_text(ds_motivo_canc) AS motivo_cancelamento,
       clean_text(cd_interdicao) AS cd_interdicao, -- TODO: renomear?
       clean_text(cd_marca_nac1) AS cd_marca_nac1, -- TODO: renomear?
