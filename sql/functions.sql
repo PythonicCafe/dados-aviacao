@@ -7,27 +7,6 @@ BEGIN
 END
 $$ LANGUAGE 'plpgsql' IMMUTABLE;
 
-CREATE OR REPLACE FUNCTION parse_date(date_str TEXT) RETURNS DATE AS $$
-DECLARE
-    parsed_date DATE;
-BEGIN
-  IF length(date_str) = 8 THEN -- Formato DDMMYYYY
-      parsed_date := to_date(date_str, 'DDMMYYYY');
-  ELSIF length(date_str) = 6 THEN -- Formato DDMMYY
-    parsed_date := to_date(
-      CASE
-          WHEN substring(date_str, 5, 2)::int <= 50 THEN substring(date_str, 1, 4) || '20' || substring(date_str, 5, 2)
-          ELSE substring(date_str, 1, 4) || '19' || substring(date_str, 5, 2)
-      END,
-      'DDMMYYYY'
-    );
-    ELSE -- Caso o formato não seja reconhecido, lança um erro
-        RAISE EXCEPTION 'Formato de data não reconhecido: %', date_str;
-    END IF;
-    RETURN parsed_date;
-END;
-$$ LANGUAGE 'plpgsql' IMMUTABLE;
-
 CREATE OR REPLACE FUNCTION parse_int(value TEXT) RETURNS INT AS $$
 BEGIN
   RETURN CASE
